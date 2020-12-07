@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -12,7 +12,8 @@ export class ServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
 
   constructor(private serversService: ServersService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     //+ size is added to make sure 
@@ -24,6 +25,13 @@ export class ServerComponent implements OnInit {
         this.server = this.serversService.getServer(+params['id']);
       }
     );
+  }
+
+  //navigate to edit server component
+  onEdit(){
+    //need Router enjected to be able to call the navigate function
+    //want to append edit to the currently loaded route 
+    this.router.navigate(["edit"], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
 }
