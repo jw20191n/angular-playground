@@ -41,6 +41,7 @@ const appRoutes: Routes = [
     //so there is no need to redeclare them
 
     imports: [
+        // RouterModule.forRoot(appRoutes, {useHash: true})
         RouterModule.forRoot(appRoutes)
     ],
     //exports tells angular, from this module
